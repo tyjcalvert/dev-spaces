@@ -1,6 +1,6 @@
 schemaVersion: 2.1.0
 metadata:
-  name: nodejs-web-app
+  name: dev-spaces
 components:
   - name: tools
     container:
@@ -9,7 +9,7 @@ components:
         - exposure: public
           name: nodejs
           protocol: http
-          targetPort: 3000
+          targetPort: 8080
       memoryLimit: 1G
       mountSources: true
       volumeMounts:
@@ -57,8 +57,8 @@ commands:
       label: "Stop the web app"
       component: tools
       commandLine: >-
-          node_server_pids=$(pgrep -fx '.*nodemon (--inspect )?app.js' | tr "\\n" " ") &&
-          echo "Stopping node server with PIDs: ${node_server_pids}" && 
-          kill -15 ${node_server_pids} &>/dev/null && echo 'Done.'
+        node_server_pids=$(pgrep -fx '.*nodemon (--inspect )?app.js' | tr "\\n" " ") &&
+        echo "Stopping node server with PIDs: ${node_server_pids}" && 
+        kill -15 ${node_server_pids} &>/dev/null && echo 'Done.'
       group:
         kind: run
